@@ -5,7 +5,6 @@ var creepEnums = require("creep.enums");
 module.exports.loop = function () {
     for(var i in Game.creeps) {
         var creep = Game.creeps[i];
-
         switch(creep.memory.role) {
             case creepEnums.Roles.HARVESTER:
                 harvester.run(creep);
@@ -23,7 +22,7 @@ module.exports.loop = function () {
         
         if (spawn.energy >= 300) {
             var x = Game.time;
-            spawn.createCreep([MOVE, CARRY, WORK], 'Worker' + x, { memory: {role: creepEnums.Roles.HARVESTER}});
+            spawn.createCreep([MOVE, CARRY, WORK], 'Worker' + x, {role: creepEnums.Roles.UPGRADER});
         }
     }
     
