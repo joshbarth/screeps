@@ -3,9 +3,8 @@ var upgrader = require("role.upgrader");
 var creepEnums = require("creep.enums");
 
 module.exports.loop = function () {
-    for(var i in Game.creeps) {
-        var creep = Game.creeps[i];
-        switch(creep.memory.role) {
+    Game.creeps.forEach(function (creep) {
+        switch (creep.memory.role) {
             case creepEnums.Roles.HARVESTER:
                 harvester.run(creep);
                 break;
@@ -15,16 +14,14 @@ module.exports.loop = function () {
             default:
                 break;
         }
-    }
-    
-    for(var i in Game.spawns) {
-        var spawn = Game.spawns[i];
-        
+    });
+
+    Game.spawns.forEach(function (spawn){
         if (spawn.energy >= 300) {
             var x = Game.time;
-            spawn.createCreep([MOVE, CARRY, WORK], 'Worker' + x, {role: creepEnums.Roles.UPGRADER});
+            spawn.createCreep([MOVE, CARRY, WORK], 'Worker' + x, {role: creepEnums.Roles.HARVESTER});
         }
-    }
+    });
     
     //clean up dead creeps
     for(var name in Memory.creeps) {
@@ -32,4 +29,4 @@ module.exports.loop = function () {
             delete Memory.creeps[name];
         }
     }
-}
+};

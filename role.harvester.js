@@ -3,7 +3,7 @@ var enums = require("creep.enums");
 var roleHarvester = {
     run: function(creep) {
         var target;
-        if(_.sum(creep.carry) == creep.carryCapacity) {
+        if(_.sum(creep.carry) === creep.carryCapacity) {
             creep.memory.state = enums.States.TRANSFER;
             target = creep.pos.findClosestByPath(FIND_MY_SPAWNS);
         } else {
@@ -14,7 +14,7 @@ var roleHarvester = {
         if(creep.pos.isNearTo(target)) {
             switch(creep.memory.state) {
                 case enums.States.HARVEST:
-                    creep.harvest(target)
+                    creep.harvest(target);
                     break;
                 case enums.States.TRANSFER:
                     creep.transfer(target, RESOURCE_ENERGY);
