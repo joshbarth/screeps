@@ -2,13 +2,21 @@ var harvester = require("role.harvester");
 var upgrader = require("role.upgrader");
 var creepEnums = require("creep.enums");
 
+var targetHarvesters = 3;
+var targetUpgraders = 1;
+
 module.exports.loop = function () {
+    var numOfHarvesters = 0;
+    var numOfUpgraders = 0;
+
     Game.creeps.forEach(function (creep) {
         switch (creep.memory.role) {
             case creepEnums.Roles.HARVESTER:
+                numOfHarvesters++;
                 harvester.run(creep);
                 break;
             case creepEnums.Roles.UPGRADER:
+                numOfUpgraders++;
                 upgrader.run(creep);
                 break;
             default:
@@ -19,7 +27,15 @@ module.exports.loop = function () {
     Game.spawns.forEach(function (spawn){
         if (spawn.energy >= 300) {
             var x = Game.time;
-            spawn.createCreep([MOVE, CARRY, WORK], 'Worker' + x, {role: creepEnums.Roles.HARVESTER});
+            var role;
+            if(numOfHarvesters < targetHarvesters) {
+                role = creepEnums.Roles.HARVESTER;
+            } else if(numOfUpgraders < targetUpgraders) {
+                role = creepEnums.Roles.UPGRADER;
+            }
+            if(role !== undefined) {
+                spawn.createCreep([MOVE, CARRY, WORK], 'Worker' + x, {role: role});
+            }
         }
     });
     
