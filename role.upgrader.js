@@ -5,7 +5,7 @@ var roleUpgrader = {
         var target;
         if (_.sum(creep.carry) === creep.carryCapacity) {
             creep.memory.state = enums.States.UPGRADE;
-            target = creep.room.controller.pos;
+            target = creep.room.controller;
         } else {
             creep.memory.state = enums.States.WITHDRAW;
             target = creep.pos.findClosestByPath(FIND_MY_SPAWNS);
