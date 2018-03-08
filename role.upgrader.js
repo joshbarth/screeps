@@ -17,7 +17,7 @@ var roleUpgrader = {
                     creep.upgradeController(target);
                     break;
                 case enums.States.WITHDRAW:
-                    creep.withdraw(target, RESOURCE_ENERGY);
+                    console.log(creep.withdraw(target, RESOURCE_ENERGY));
                     break;
                 default:
                     break;
