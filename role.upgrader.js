@@ -8,7 +8,7 @@ var roleUpgrader = {
             target = creep.room.controller.pos;
         } else {
             creep.memory.state = enums.States.WITHDRAW;
-            target = creep.pos.findClosestByPath(Room.FIND_MY_SPAWNS);
+            target = creep.pos.findClosestByPath(FIND_MY_SPAWNS);
         }
         
         if(creep.pos.isNearTo(target)) {
