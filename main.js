@@ -30,8 +30,10 @@ module.exports.loop = function () {
             var role;
             if(numOfHarvesters < targetHarvesters) {
                 role = creepEnums.Roles.HARVESTER;
+                console.log("[INFO] Spawning Harvester");
             } else if(numOfUpgraders < targetUpgraders) {
                 role = creepEnums.Roles.UPGRADER;
+                console.log("[INFO] Spawning Upgrader");
             }
             if(role !== undefined) {
                 spawn.createCreep([MOVE, CARRY, WORK], 'Worker' + x, {role: role});
