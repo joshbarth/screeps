@@ -10,20 +10,19 @@ var roleHarvester = {
             creep.memory.state = enums.States.HARVEST;
             target = creep.pos.findClosestByPath(FIND_SOURCES);
         }
-        
-        if(creep.pos.isNearTo(target)) {
-            switch(creep.memory.state) {
-                case enums.States.HARVEST:
-                    creep.harvest(target);
-                    break;
-                case enums.States.TRANSFER:
-                    creep.transfer(target, RESOURCE_ENERGY);
-                    break;
-                default:
-                    break;
-            }
-        } else {
-            creep.moveTo(target);
+        switch(creep.memory.state) {
+            case enums.States.HARVEST:
+                if(creep.harvest(target) === ERR_NOT_IN_RANGE) {
+                    creep.moveTo(target);
+                }
+                break;
+            case enums.States.TRANSFER:
+                if(creep.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+                    creep.moveTo(target)
+                }
+                break;
+            default:
+                break;
         }
     }
 };
