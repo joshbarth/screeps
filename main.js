@@ -9,7 +9,7 @@ module.exports.loop = function () {
     var numOfHarvesters = 0;
     var numOfUpgraders = 0;
 
-    Game.creeps.forEach(function (creep) {
+    Array.from(Game.creeps).forEach(function (creep) {
         switch (creep.memory.role) {
             case creepEnums.Roles.HARVESTER:
                 numOfHarvesters++;
@@ -24,7 +24,7 @@ module.exports.loop = function () {
         }
     });
 
-    Game.spawns.forEach(function (spawn){
+    Array.from(Game.spawns).forEach(function (spawn){
         if (spawn.energy >= 300) {
             var x = Game.time;
             var role;
