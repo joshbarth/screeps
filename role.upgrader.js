@@ -3,7 +3,7 @@ var enums = require("creep.enums");
 var roleUpgrader = {
     run: function(creep) {
         var target;
-        if (_.sum(creep.carry) === creep.carryCapacity) {
+        if (_.sum(creep.carry) === creep.carryCapacity || (_.sum(creep.carry) !== 0 && creep.memory.state === enums.States.UPGRADE)) {
             creep.memory.state = enums.States.UPGRADE;
             target = creep.room.controller;
         } else {
