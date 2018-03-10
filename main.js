@@ -3,7 +3,7 @@ var upgrader = require("role.upgrader");
 var creepEnums = require("creep.enums");
 
 var targetHarvesters = 5;
-var targetUpgraders = 5;
+var targetUpgraders = 7;
 
 module.exports.loop = function () {
     var numOfHarvesters = 0;
